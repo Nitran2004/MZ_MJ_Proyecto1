@@ -1,0 +1,45 @@
+﻿@model Proyecto1_MZ_MJ.Models.Queja
+@{
+    ViewData["Title"] = "Eliminar Queja";
+}
+
+<div class="container mt-4">
+    <h2 class="text-danger">Eliminar Queja</h2>
+    <hr />
+
+    <div class="alert alert-warning">
+        <h4>¿Está seguro de que desea eliminar esta queja?</h4>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Nombre:</dt>
+                <dd class="col-sm-9">@Model.Nombre</dd>
+
+                <dt class="col-sm-3">Queja:</dt>
+                <dd class="col-sm-9">@Model.QuejaTexto</dd>
+
+                <dt class="col-sm-3">Fecha:</dt>
+
+                @if (!string.IsNullOrEmpty(Model.Foto))
+                {
+                    <dt class="col-sm-3">Foto:</dt>
+                    <dd class="col-sm-9">
+                        <img src="@Model.Foto" alt="Foto" style="max-width: 150px; border-radius: 5px;" />
+                    </dd>
+                }
+            </dl>
+        </div>
+    </div>
+
+    <form asp-action="Delete" method="post" class="mt-3">
+        <input type="hidden" asp-for="QuejaId" />
+        <button type="submit" class="btn btn-danger">
+            <i class="bi bi-trash"></i> Eliminar
+        </button>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Cancelar
+        </a>
+    </form>
+</div>

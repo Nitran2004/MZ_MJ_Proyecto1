@@ -1,0 +1,59 @@
+﻿@model Proyecto1_MZ_MJ.Models.Queja
+@{
+    ViewData["Title"] = "Editar Queja";
+}
+
+<div class="container mt-4">
+    <h2>Editar Queja</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-8">
+            <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                <input type="hidden" asp-for="QuejaId" />
+                <input type="hidden" asp-for="Foto" />
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="mb-3">
+                    <label asp-for="Nombre" class="form-label"></label>
+                    <input asp-for="Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="QuejaTexto" class="form-label"></label>
+                    <textarea asp-for="QuejaTexto" class="form-control" rows="5"></textarea>
+                    <span asp-validation-for="QuejaTexto" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    @if (!string.IsNullOrEmpty(Model.Foto))
+                    {
+                        <div class="mb-2">
+                            <label class="form-label">Foto Actual:</label><br />
+                            <img src="@Model.Foto" alt="Foto actual" style="max-width: 200px; border-radius: 5px;" />
+                        </div>
+                    }
+                    <label for="foto" class="form-label">Cambiar Foto (Opcional)</label>
+                    <input type="file" class="form-control" id="foto" name="foto" accept="image/*" />
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save"></i> Actualizar
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
