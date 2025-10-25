@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Proyecto1_MZ_MJ.Models.Queja>
 
 @{
-    ViewData["Title"] = "Lista de Quejas";
+    ViewData["Title"] = "Problematicas del sector";
 }
 
 <style>
@@ -61,7 +61,7 @@
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Lista de Quejas</h2>
+        <h2>Problematicas del sector</h2>
         <a asp-action="Create" class="btn btn-primary">
             <i class="bi bi-plus-circle"></i> Nueva Queja
         </a>
@@ -82,6 +82,7 @@
                     <th>Foto</th>
                     <th>Nombre</th>
                     <th>Queja</th>
+                    <th>Sector</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -101,6 +102,7 @@
                         </td>
                         <td>@item.Nombre</td>
                         <td>@item.QuejaTexto</td>
+                        <td>@item.Sector</td>
                         <td>
                             <a asp-action="Details" asp-route-id="@item.QuejaId" class="btn btn-info me-2">
                                 <i class="bi bi-eye"></i> Detalle

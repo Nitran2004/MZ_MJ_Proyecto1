@@ -8,9 +8,16 @@ namespace Proyecto1_MZ_MJ.Models
 
         [Required(ErrorMessage = "El campo Nombre es obligatorio.")]
         public string? Nombre { get; set; }
+        [Display(Name = "Queja")]
+
 
         [Required(ErrorMessage = "El campo Queja es obligatorio.")]
         public string? QuejaTexto { get; set; }
+
+        [Required(ErrorMessage = "El campo Sector es obligatorio.")]
+
+        public string? Sector { get; set; }
+
 
         public string? Foto { get; set; }
     }

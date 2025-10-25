@@ -22,5 +22,7 @@ namespace MZ_MJ_Proyecto1.Data
 
         public DbSet<Proyecto1_MZ_MJ.Models.Queja>? Queja { get; set; }
 
+        public DbSet<Proyecto1_MZ_MJ.Models.Evento>? Evento { get; set; }
+
     }
 }

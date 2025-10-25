@@ -1,8 +1,74 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿<!-- Views/Home/Index.cshtml -->
+@{
+    ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+    <!-- Hero Section -->
+    <div class="row mt-5 mb-5">
+        <div class="col-12 text-center">
+            <h1 class="display-3 fw-bold text-primary">Diseño de Proyectos</h1>
+            <p class="lead text-muted">Transformamos tus ideas en realidad con soluciones innovadoras</p>
+        </div>
+    </div>
+
+    <!-- Descripción Principal -->
+    <div class="row mb-5">
+        <div class="col-lg-6 mb-4">
+            <div class="card h-100 shadow-sm">
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800"
+                     class="card-img-top" alt="Proyectos" style="height: 250px; object-fit: cover;">
+                <div class="card-body">
+                    <h3 class="card-title">Nuestra Misión</h3>
+                    <p class="card-text">
+                        Nos especializamos en el diseño y desarrollo de proyectos innovadores que impulsan el
+                        crecimiento de tu negocio. Ofrecemos soluciones
+                        personalizadas adaptadas a tus necesidades.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 mb-4">
+            <div class="card h-100 shadow-sm">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800"
+                     class="card-img-top" alt="Equipo" style="height: 250px; object-fit: cover;">
+                <div class="card-body">
+                    <h3 class="card-title">Nuestro Objetivo</h3>
+                    <p class="card-text">
+                        Buscamos desarrollar proyectos innovadores que respondan a las necesidades de los usuarios, brindando soluciones efectivas y creativas en la gestión de eventos y quejas.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Servicios -->
+    <div class="row mb-5">
+  
+    <!-- Call to Action -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card bg-primary text-white text-center p-5">
+                <h2 class="fw-bold mb-3">¿Listo para comenzar tu proyecto?</h2>
+                <p class="lead mb-4">Contáctanos hoy y descubre cómo podemos ayudarte</p>
+                <div>
+                    <a href="#" class="btn btn-light btn-lg me-2">Contáctanos</a>
+                    <a asp-controller="Quejas" asp-action="Create" class="btn btn-outline-light btn-lg">
+                        Enviar Queja/Sugerencia
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<style>
+    .card {
+        transition: transform 0.3s ease;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+</style>

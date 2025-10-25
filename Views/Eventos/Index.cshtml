@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Proyecto1_MZ_MJ.Models.Evento>
+
+@{
+    ViewData["Title"] = "Eventos e Invitaciones";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="bi bi-calendar-event"></i> Eventos e Invitaciones</h2>
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Crear Evento
+        </a>
+    </div>
+
+    <div class="row">
+        @foreach (var evento in Model)
+        {
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    @if (!string.IsNullOrEmpty(evento.ImagenEvento))
+                    {
+                        <img src="@evento.ImagenEvento" class="card-img-top" alt="@evento.Titulo" style="height: 200px; object-fit: cover;">
+                    }
+                    else
+                    {
+                        <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="height: 200px;">
+                            <i class="bi bi-calendar-event display-1 text-white"></i>
+                        </div>
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@evento.Titulo</h5>
+                        <p class="card-text text-muted">
+                            <small>@evento.Descripcion?.Substring(0, Math.Min(100, evento.Descripcion.Length))...</small>
+                        </p>
+                        <hr>
+                        <p class="mb-1">
+                            <i class="bi bi-calendar3"></i>
+                            <strong>@evento.FechaEvento.ToString("dd/MM/yyyy HH:mm")</strong>
+                        </p>
+                        <p class="mb-1">
+                            <i class="bi bi-geo-alt"></i> @evento.Ubicacion
+                        </p>
+                        @if (!string.IsNullOrEmpty(evento.TipoEvento))
+                        {
+                            <p class="mb-1">
+                                <span class="badge bg-info">@evento.TipoEvento</span>
+                            </p>
+                        }
+                        @if (evento.CapacidadMaxima.HasValue)
+                        {
+                            <p class="mb-1">
+                                <i class="bi bi-people"></i> Capacidad: @evento.CapacidadMaxima
+                            </p>
+                        }
+@*                         <span class="badge @(evento.Activo ? "bg-success" : "bg-secondary")">
+                            @(evento.Activo ? "Activo" : "Inactivo")
+                        </span> *@
+                    </div>
+                    <div class="card-footer bg-white">
+                        <a asp-action="Details" asp-route-id="@evento.EventoId" class="btn btn-sm btn-info">
+                            <i class="bi bi-eye"></i> Ver
+                        </a>
+                        <a asp-action="Edit" asp-route-id="@evento.EventoId" class="btn btn-sm btn-warning">
+                            <i class="bi bi-pencil"></i> Editar
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@evento.EventoId" class="btn btn-sm btn-danger">
+                            <i class="bi bi-trash"></i> Eliminar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

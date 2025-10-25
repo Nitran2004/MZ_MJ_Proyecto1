@@ -56,7 +56,7 @@ namespace MZ_MJ_Proyecto1.Controllers
         // POST: Quejas/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("QuejaId,Nombre,QuejaTexto")] Queja queja, IFormFile? foto)
+        public async Task<IActionResult> Create([Bind("QuejaId,Nombre,QuejaTexto,Sector")] Queja queja, IFormFile? foto)
         {
             if (ModelState.IsValid)
             {
@@ -100,7 +100,7 @@ namespace MZ_MJ_Proyecto1.Controllers
         // POST: Quejas/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("QuejaId,Nombre,QuejaTexto,Foto")] Queja queja, IFormFile? foto)
+        public async Task<IActionResult> Edit(int id, [Bind("QuejaId,Nombre,QuejaTexto,Foto,Sector")] Queja queja, IFormFile? foto)
         {
             if (id != queja.QuejaId)
             {

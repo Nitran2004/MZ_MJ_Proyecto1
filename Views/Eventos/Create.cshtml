@@ -1,0 +1,114 @@
+﻿@model Proyecto1_MZ_MJ.Models.Evento
+
+@{
+    ViewData["Title"] = "Crear Evento";
+}
+
+<div class="container mt-4">
+    <h2>Crear Nuevo Evento</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-8">
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="mb-3">
+                    <label asp-for="Titulo" class="form-label"></label>
+                    <input asp-for="Titulo" class="form-control" placeholder="Ej: Conferencia Anual 2025" />
+                    <span asp-validation-for="Titulo" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Descripcion" class="form-label"></label>
+                    <textarea asp-for="Descripcion" class="form-control" rows="4" placeholder="Describe el evento..."></textarea>
+                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="FechaEvento" class="form-label"></label>
+                        <input asp-for="FechaEvento" class="form-control" type="datetime-local" />
+                        <span asp-validation-for="FechaEvento" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="TipoEvento" class="form-label"></label>
+                        <select asp-for="TipoEvento" class="form-select">
+                            <option value="">Seleccione...</option>
+                            <option value="Conferencia">Conferencia</option>
+                            <option value="Taller">Taller</option>
+                            <option value="Reunión">Reunión</option>
+                            <option value="Celebración">Celebración</option>
+                            <option value="Capacitación">Capacitación</option>
+                            <option value="Webinar">Webinar</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Ubicacion" class="form-label"></label>
+                        <input asp-for="Ubicacion" class="form-control" placeholder="Dirección del evento" />
+                        <span asp-validation-for="Ubicacion" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Organizador" class="form-label"></label>
+                        <input asp-for="Organizador" class="form-control" placeholder="Nombre del organizador" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="CapacidadMaxima" class="form-label"></label>
+                        <input asp-for="CapacidadMaxima" class="form-control" type="number" min="1" />
+                        <span asp-validation-for="CapacidadMaxima" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Imagen del Evento</label>
+                        <input type="file" name="imagen" class="form-control" accept="image/*" />
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="NotasAdicionales" class="form-label"></label>
+                    <textarea asp-for="NotasAdicionales" class="form-control" rows="3" placeholder="Información adicional..."></textarea>
+                </div>
+
+                <div class="row">
+@*                     <div class="col-md-6 mb-3">
+                        <div class="form-check">
+                            <input asp-for="Activo" class="form-check-input" />
+                            <label asp-for="Activo" class="form-check-label"></label>
+                        </div>
+                    </div> *@
+
+                    <div class="col-md-6 mb-3">
+                        <div class="form-check">
+                            <input asp-for="RequiereConfirmacion" class="form-check-input" />
+                            <label asp-for="RequiereConfirmacion" class="form-check-label"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-check-circle"></i> Crear Evento
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -23,6 +23,11 @@
                     <textarea asp-for="QuejaTexto" class="form-control" rows="5" placeholder="Describa su queja"></textarea>
                     <span asp-validation-for="QuejaTexto" class="text-danger"></span>
                 </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Sector" class="control-label"></label>
+                    <input asp-for="Sector" class="form-control" />
+                    <span asp-validation-for="Sector" class="text-danger"></span>
+                </div>
 
                 <div class="mb-3">
                     <label for="foto" class="form-label">Foto (Opcional)</label>
