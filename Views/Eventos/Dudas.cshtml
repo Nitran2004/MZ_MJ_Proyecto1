@@ -1,0 +1,251 @@
+﻿@{
+    ViewData["Title"] = "¿Cómo agregar un evento?";
+}
+
+<style>
+    .step-card {
+        transition: all 0.3s ease;
+        border-left: 4px solid #198754;
+    }
+
+        .step-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+    .step-number {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="text-center mb-4">
+                <i class="bi bi-calendar-event-fill display-1 text-success"></i>
+                <h1 class="mt-3">¿Cómo agregar un evento?</h1>
+                <p class="lead text-muted">Aprende a crear y publicar eventos comunitarios fácilmente</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+
+            <!-- Paso 1 -->
+            <div class="card step-card mb-4">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-start">
+                        <div class="step-number me-4">1</div>
+                        <div>
+                            <h4 class="mb-2">Ve a la sección Eventos</h4>
+                            <p class="text-muted mb-2">
+                                Accede al módulo de Eventos desde el menú principal de navegación.
+                            </p>
+                            <a asp-controller="Eventos" asp-action="Index" class="btn btn-sm btn-outline-success">
+                                <i class="bi bi-arrow-right-circle"></i> Ir a Eventos
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 2 -->
+            <div class="card step-card mb-4">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-start">
+                        <div class="step-number me-4">2</div>
+                        <div>
+                            <h4 class="mb-2">Presiona el botón "Crear Evento" en la parte superior derecha</h4>
+                            <p class="text-muted mb-2">
+                                Encontrarás un botón azul con un ícono de calendario en la esquina superior derecha.
+                            </p>
+                            <div class="alert alert-info">
+                                <i class="bi bi-info-circle"></i> El botón se ve así:
+                                <button class="btn btn-primary btn-sm ms-2" disabled>
+                                    <i class="bi bi-plus-circle"></i> Crear Evento
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 3 -->
+            <div class="card step-card mb-4">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-start">
+                        <div class="step-number me-4">3</div>
+                        <div>
+                            <h4 class="mb-2">Agrega el nombre del evento</h4>
+                            <p class="text-muted mb-2">
+                                Escribe un título claro y descriptivo para tu evento.
+                            </p>
+                            <div class="bg-light p-3 rounded">
+                                <strong>Ejemplos:</strong><br>
+                                • "Minga Comunitaria - Limpieza del Parque"<br>
+                                • "Reunión Semanal de Vecinos"<br>
+                                • "Celebración Día de la Comunidad"<br>
+                                • "Taller de Reciclaje"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 4 -->
+            <div class="card step-card mb-4">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-start">
+                        <div class="step-number me-4">4</div>
+                        <div>
+                            <h4 class="mb-2">Describe el evento</h4>
+                            <p class="text-muted mb-2">
+                                Proporciona información detallada sobre el evento: qué se hará, quién puede asistir, qué deben llevar, etc.
+                            </p>
+                            <div class="bg-light p-3 rounded">
+                                <strong>Ejemplo:</strong><br>
+                                <em>
+                                    "Invitamos a toda la comunidad a participar en la minga de limpieza del parque central.
+                                    Traigan guantes, escobas y fundas de basura. Habrá refrigerio para todos los participantes."
+                                </em>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 5 -->
+            <div class="card step-card mb-4">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-start">
+                        <div class="step-number me-4">5</div>
+                        <div>
+                            <h4 class="mb-2">Agrega la Fecha del Evento</h4>
+                            <p class="text-muted mb-2">
+                                Selecciona la fecha y hora exacta en que se realizará el evento.
+                            </p>
+                            <div class="alert alert-warning">
+                                <i class="bi bi-calendar3"></i>
+                                <strong>Importante:</strong> Asegúrate de seleccionar la fecha correcta, incluyendo la hora de inicio.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 6 -->
+            <div class="card step-card mb-4">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-start">
+                        <div class="step-number me-4">6</div>
+                        <div>
+                            <h4 class="mb-2">Selecciona el Tipo de Evento</h4>
+                            <p class="text-muted mb-2">
+                                Elige la categoría que mejor describa tu evento.
+                            </p>
+                            <div class="bg-light p-3 rounded">
+                                <strong>Tipos disponibles:</strong><br>
+                                • Conferencia<br>
+                                • Taller<br>
+                                • Reunión<br>
+                                • Celebración<br>
+                                • Capacitación<br>
+                                • Webinar<br>
+                                • Otro
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 7 -->
+            <div class="card step-card mb-4">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-start">
+                        <div class="step-number me-4">7</div>
+                        <div>
+                            <h4 class="mb-2">Agrega la cantidad de personas a asistir si es posible</h4>
+                            <p class="text-muted mb-2">
+                                Indica la capacidad máxima del evento para una mejor organización.
+                            </p>
+                            <div class="alert alert-info">
+                                <i class="bi bi-people"></i>
+                                Este campo es opcional, pero ayuda a planificar mejor el evento.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 8 -->
+            <div class="card step-card mb-4">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-start">
+                        <div class="step-number me-4">8</div>
+                        <div>
+                            <h4 class="mb-2">Sube una fotografía del evento</h4>
+                            <p class="text-muted mb-2">
+                                Agrega una imagen representativa que ilustre el tipo de evento (opcional pero recomendado).
+                            </p>
+                            <div class="alert alert-warning">
+                                <i class="bi bi-camera"></i>
+                                <strong>Consejos:</strong>
+                                <ul class="mb-0 mt-2">
+                                    <li>Usa imágenes de buena calidad</li>
+                                    <li>Puede ser una foto de eventos anteriores</li>
+                                    <li>O una imagen que represente la actividad</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 9 -->
+            <div class="card step-card mb-4 border-success">
+                <div class="card-body p-4 bg-success bg-opacity-10">
+                    <div class="d-flex align-items-start">
+                        <div class="step-number me-4 bg-success">9</div>
+                        <div>
+                            <h4 class="mb-2 text-success">Al terminar, selecciona el botón "Crear Evento"</h4>
+                            <p class="text-muted mb-2">
+                                Revisa toda la información y presiona el botón verde para publicar tu evento.
+                            </p>
+                            <button class="btn btn-success mb-2" disabled>
+                                <i class="bi bi-check-circle"></i> Crear Evento
+                            </button>
+                            <div class="alert alert-success mb-0">
+                                <i class="bi bi-check-circle-fill"></i>
+                                ¡Tu evento será visible para toda la comunidad!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="row mt-5 mb-5">
+        <div class="col-12 text-center">
+            <h4 class="mb-4">¿Listo para crear tu evento?</h4>
+            <a asp-controller="Eventos" asp-action="Create" class="btn btn-success btn-lg me-2">
+                <i class="bi bi-calendar-plus"></i> Crear Evento Ahora
+            </a>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary btn-lg">
+                <i class="bi bi-house"></i> Volver al Inicio
+            </a>
+        </div>
+    </div>
+</div>

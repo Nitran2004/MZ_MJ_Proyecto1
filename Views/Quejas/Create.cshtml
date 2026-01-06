@@ -1,10 +1,10 @@
 ﻿@model Proyecto1_MZ_MJ.Models.Queja
 @{
-    ViewData["Title"] = "Crear Queja";
+    ViewData["Title"] = "Agregar Nuevo Reporte";
 }
 
 <div class="container mt-4">
-    <h2>Crear Nueva Queja</h2>
+    <h2>Agregar Nuevo Reporte</h2>
     <hr />
 
     <div class="row">
@@ -28,11 +28,20 @@
                     <input asp-for="Sector" class="form-control" />
                     <span asp-validation-for="Sector" class="text-danger"></span>
                 </div>
-
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Prioridad" class="form-label"></label>
+                    <select asp-for="Prioridad" class="form-select">
+                        <option value="">Seleccione...</option>
+                        <option value="Prioridad Alta">Prioridad Alta</option>
+                        <option value="Prioridad Media">Prioridad Media</option>
+                        <option value="Prioridad Baja">Prioridad Baja</option>
+                    </select>
+                    <span asp-validation-for="Prioridad" class="text-danger"></span>
+                </div>
                 <div class="mb-3">
-                    <label for="foto" class="form-label">Foto (Opcional)</label>
-                    <input type="file" class="form-control" id="foto" name="foto" accept="image/*" />
-                    <small class="text-muted">Formatos permitidos: JPG, PNG, GIF</small>
+                    <label class="form-label">Subir Evidencia (Foto)</label>
+                    <input type="file" name="foto" class="form-control" accept="image/*" />
+                    <span asp-validation-for="Foto" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">

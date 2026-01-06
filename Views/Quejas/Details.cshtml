@@ -1,10 +1,10 @@
 ﻿@model Proyecto1_MZ_MJ.Models.Queja
 @{
-    ViewData["Title"] = "Detalles de la Queja";
+    ViewData["Title"] = "Detalles de los Reportes";
 }
 
 <div class="container mt-4">
-    <h2>Detalles de la Queja</h2>
+    <h2>Detalles de la Reportes</h2>
     <hr />
 
     <div class="card">
@@ -32,6 +32,10 @@
 
                         <dt class="col-sm-3">Sector:</dt>
                         <dd class="col-sm-9">@Model.Sector</dd>
+
+                        <dt class="col-sm-3">Prioridad:</dt>
+                        <dd class="col-sm-9">@Model.Prioridad</dd>
+
                     </dl>
                 </div>
             </div>

@@ -56,24 +56,35 @@ namespace MZ_MJ_Proyecto1.Controllers
         // POST: Quejas/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("QuejaId,Nombre,QuejaTexto,Sector")] Queja queja, IFormFile? foto)
+        public async Task<IActionResult> Create([Bind("QuejaId,Nombre,QuejaTexto,Prioridad,Sector,Foto")] Queja queja, IFormFile? foto)
         {
-            if (ModelState.IsValid)
+            // 1. Verificamos si vino una foto en el formulario
+            if (foto == null || foto.Length == 0)
             {
-                // Guardar foto si existe
-                if (foto != null && foto.Length > 0)
+                ModelState.AddModelError("Foto", "Debe subir una imagen como evidencia.");
+            }
+            else
+            {
+                // 2. Si hay foto, procesamos el archivo
+                var carpeta = Path.Combine(_env.WebRootPath, "fotos");
+                Directory.CreateDirectory(carpeta);
+                var archivo = Guid.NewGuid() + Path.GetExtension(foto.FileName);
+                var ruta = Path.Combine(carpeta, archivo);
+
+                using (var stream = new FileStream(ruta, FileMode.Create))
                 {
-                    var carpeta = Path.Combine(_env.WebRootPath, "fotos");
-                    Directory.CreateDirectory(carpeta);
-                    var archivo = Guid.NewGuid() + Path.GetExtension(foto.FileName);
-                    var ruta = Path.Combine(carpeta, archivo);
-                    using (var stream = new FileStream(ruta, FileMode.Create))
-                    {
-                        await foto.CopyToAsync(stream);
-                    }
-                    queja.Foto = "/fotos/" + archivo;
+                    await foto.CopyToAsync(stream);
                 }
 
+                // 3. Asignamos la ruta al modelo ANTES de validar el ModelState
+                queja.Foto = "/fotos/" + archivo;
+
+                // Limpiamos errores previos de validación sobre el campo Foto porque ya la asignamos
+                ModelState.Remove("Foto");
+            }
+
+            if (ModelState.IsValid)
+            {
                 _context.Add(queja);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -100,7 +111,7 @@ namespace MZ_MJ_Proyecto1.Controllers
         // POST: Quejas/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("QuejaId,Nombre,QuejaTexto,Foto,Sector")] Queja queja, IFormFile? foto)
+        public async Task<IActionResult> Edit(int id, [Bind("QuejaId,Nombre,QuejaTexto,Prioridad,Foto,Sector")] Queja queja, IFormFile? foto)
         {
             if (id != queja.QuejaId)
             {
@@ -184,6 +195,12 @@ namespace MZ_MJ_Proyecto1.Controllers
         private bool QuejaExists(int id)
         {
             return (_context.Queja?.Any(e => e.QuejaId == id)).GetValueOrDefault();
+        }
+
+        // GET: Quejas/Dudas
+        public IActionResult Dudas()
+        {
+            return View();
         }
     }
 }

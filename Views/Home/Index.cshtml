@@ -1,74 +1,360 @@
-﻿<!-- Views/Home/Index.cshtml -->
+﻿@model Proyecto1_MZ_MJ.Models.HomeIndexViewModel
+
 @{
-    ViewData["Title"] = "Inicio";
+    ViewData["Title"] = "Inicio - Barrio San José";
+    string arroba = "@"; 
 }
 
-<div class="container">
-    <!-- Hero Section -->
-    <div class="row mt-5 mb-5">
-        <div class="col-12 text-center">
-            <h1 class="display-3 fw-bold text-primary">Diseño de Proyectos</h1>
-            <p class="lead text-muted">Transformamos tus ideas en realidad con soluciones innovadoras</p>
-        </div>
-    </div>
+<style>
+    body {
+        background: linear-gradient(135deg, #f5c6e8 0%, #fce4ec 25%, #fff9c4 50%, #c8e6c9 75%, #b3e5fc 100%);
+        background-attachment: fixed;
+        margin: 0;
+    }
 
-    <!-- Descripción Principal -->
+    /* --- SECCIÓN HERO --- */
+    .hero-full-screen {
+        min-height: 115vh; 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 60px 20px;
+    }
+
+    .hero-title-huge {
+        font-size: clamp(3rem, 8vw, 6.5rem);
+        font-weight: 900;
+        color: #1a202c;
+        margin-bottom: 20px;
+        line-height: 1;
+        letter-spacing: -3px;
+    }
+
+    .hero-subtitle-large {
+        font-size: clamp(1.2rem, 3vw, 2.2rem);
+        color: #4f46e5;
+        font-weight: 800;
+        margin-bottom: 40px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .hero-description-large {
+        font-size: clamp(1.1rem, 2vw, 1.6rem);
+        color: #4a5568;
+        max-width: 1500px;
+        line-height: 1.5;
+        margin-bottom: 50px;
+    }
+
+    /* --- BOTONES HERO --- */
+    .button-container {
+        display: flex;
+        gap: 25px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 60px;
+    }
+
+    .btn-hero {
+        padding: 20px 50px;
+        border-radius: 60px;
+        font-weight: 800;
+        text-decoration: none !important;
+        transition: all 0.3s ease;
+        font-size: 1.3rem;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .btn-eventos { background-color: #ffffff; color: #1a202c; border: 2px solid #1a202c; }
+    .btn-reportar { background-color: #2563eb; color: white; border: none; }
+    .btn-hero:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+
+    /* --- BANNER DE ALERTA --- */
+    .alert-card-dark {
+        background-color: #2d3748;
+        color: white;
+        padding: 70px 30px;
+        border-radius: 25px;
+        width: 100%;
+        max-width: 1000px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    }
+
+    .btn-alert-red {
+        background-color: #e53e3e;
+        color: white;
+        padding: 20px 50px;
+        border-radius: 60px;
+        font-weight: 900;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 15px;
+        transition: 0.3s;
+    }
+
+    /* --- DISEÑO DE TARJETAS (REUTILIZABLE) --- */
+    .home-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 25px;
+    }
+
+    .custom-card {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        overflow: hidden;
+        border: none;
+        transition: all 0.3s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .custom-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+    }
+
+    .card-img-container {
+        position: relative;
+        height: 200px;
+        background: #f1f5f9;
+    }
+
+    .card-img-custom { width: 100%; height: 100%; object-fit: cover; }
+
+    .badge-float {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(0,0,0,0.6);
+        color: white;
+        padding: 5px 15px;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        backdrop-filter: blur(5px);
+    }
+
+    .card-body-custom { padding: 20px; flex-grow: 1; }
+    
+    .card-subtitle-custom {
+        color: #4f46e5;
+        font-weight: 800;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .card-footer-custom {
+        padding: 15px;
+        background: rgba(0,0,0,0.02);
+        border-top: 1px solid rgba(0,0,0,0.05);
+    }
+
+    /* Animaciones */
+    @(arroba)keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(40px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-hero { animation: fadeInUp 1.2s ease-out; }
+
+    html { scroll-behavior: smooth; }
+    .section-header { scroll-margin-top: 100px; }
+
+    /* --- NUEVOS ESTILOS PARA PRIORIDAD --- */
+.border-alta { border-left: 10px solid #dc3545 !important; }
+.border-media { border-left: 10px solid #ffc107 !important; }
+.border-baja { border-left: 10px solid #0dcaf0 !important; }
+
+.priority-badge-home {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    z-index: 10;
+    text-transform: uppercase;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+</style>
+
+<div class="container-fluid">
+    <section class="hero-full-screen animate-hero">
+        <h1 class="hero-title-huge">
+            Promoviendo la<br>
+            <span style="color: #4f46e5;">unión vecinal</span>
+        </h1>
+        <p class="hero-subtitle-large">Proyecto Universitario - Barrio San José</p>
+        <p class="hero-description-large">
+            ¡Bienvenidos a nuestra plataforma comunitaria! Trabajamos juntos para fortalecer los lazos de nuestro barrio, 
+            organizar actividades y mantenernos informados. <br>
+            <strong>San José es de todos.</strong>
+        </p>
+        
+        <div class="button-container">
+            <a href="#seccion-eventos" class="btn-hero btn-eventos">Ver próximos eventos</a>
+            <a href="#seccion-reportes" class="btn-hero btn-reportar">Reportar un problema</a>
+        </div>
+
+        <div class="alert-card-dark">
+            <h2>Vigilando juntos, viviendo seguros.</h2>
+            <p>Reporta incidentes, comparte alertas en tiempo real y recuperemos la tranquilidad del barrio.</p>
+            <a asp-controller="Quejas" asp-action="Create" class="btn-alert-red text-decoration-none">
+                <i class="bi bi-bell-fill"></i> BOTÓN DE ALERTA RÁPIDA
+            </a>
+        </div>
+    </section>
+</div>
+
+<div class="container pb-5">
+
     <div class="row mb-5">
-        <div class="col-lg-6 mb-4">
-            <div class="card h-100 shadow-sm">
-                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800"
-                     class="card-img-top" alt="Proyectos" style="height: 250px; object-fit: cover;">
-                <div class="card-body">
-                    <h3 class="card-title">Nuestra Misión</h3>
-                    <p class="card-text">
-                        Nos especializamos en el diseño y desarrollo de proyectos innovadores que impulsan el
-                        crecimiento de tu negocio. Ofrecemos soluciones
-                        personalizadas adaptadas a tus necesidades.
-                    </p>
-                </div>
+        <div class="col-12 d-flex justify-content-between align-items-center mb-4 pt-5">
+            <div>
+                <h2 id="seccion-reportes" class="section-header fw-bold mb-1">
+                    <i class="bi bi-megaphone-fill text-primary"></i> Muro de reportes comunitarios
+                </h2>
+                <p class="text-muted mb-0 ms-2">Registro ciudadano de incidentes y evidencias.</p>
             </div>
+            <a asp-controller="Quejas" asp-action="Create" class="btn btn-primary rounded-pill px-4 shadow-sm">
+                <i class="bi bi-plus-circle"></i> Agregar Reporte
+            </a>
         </div>
 
-        <div class="col-lg-6 mb-4">
-            <div class="card h-100 shadow-sm">
-                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800"
-                     class="card-img-top" alt="Equipo" style="height: 250px; object-fit: cover;">
-                <div class="card-body">
-                    <h3 class="card-title">Nuestro Objetivo</h3>
-                    <p class="card-text">
-                        Buscamos desarrollar proyectos innovadores que respondan a las necesidades de los usuarios, brindando soluciones efectivas y creativas en la gestión de eventos y quejas.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Servicios -->
-    <div class="row mb-5">
-  
-    <!-- Call to Action -->
-    <div class="row mb-5">
         <div class="col-12">
-            <div class="card bg-primary text-white text-center p-5">
-                <h2 class="fw-bold mb-3">¿Listo para comenzar tu proyecto?</h2>
-                <p class="lead mb-4">Contáctanos hoy y descubre cómo podemos ayudarte</p>
-                <div>
-                    <a href="#" class="btn btn-light btn-lg me-2">Contáctanos</a>
-                    <a asp-controller="Quejas" asp-action="Create" class="btn btn-outline-light btn-lg">
-                        Enviar Queja/Sugerencia
-                    </a>
-                </div>
+            <div class="home-grid">
+    @foreach (var item in Model.Quejas)
+    {
+        // Lógica de detección de prioridad por texto
+        var textoPrioridad = (item.Prioridad ?? "Baja").ToLower();
+        string claseBorde = "border-baja"; 
+        string claseBadge = "bg-info text-white";
+
+        if (textoPrioridad.Contains("alta"))
+        {
+            claseBorde = "border-alta";
+            claseBadge = "bg-danger text-white";
+        }
+        else if (textoPrioridad.Contains("media"))
+        {
+            claseBorde = "border-media";
+            claseBadge = "bg-warning text-dark";
+        }
+
+        <div class="custom-card shadow-sm @claseBorde">
+            <div class="card-img-container">
+                @if (!string.IsNullOrEmpty(item.Foto))
+                {
+                    <img src="@item.Foto" class="card-img-custom" alt="Evidencia" />
+                }
+                else
+                {
+                    <div class="h-100 d-flex align-items-center justify-content-center">
+                        <i class="bi bi-camera text-muted fs-1"></i>
+                    </div>
+                }
+                
+                @* Nueva Etiqueta de Prioridad (Lado Izquierdo) *@
+                <span class="priority-badge-home @claseBadge">
+                    @item.Prioridad
+                </span>
+
+                @* Etiqueta de Sector (Lado Derecho) *@
+                <span class="badge-float">@item.Sector</span>
+            </div>
+
+            <div class="card-body-custom">
+                <span class="card-subtitle-custom">Reportado por: @item.Nombre</span>
+                <p class="card-text">@item.QuejaTexto</p>
+            </div>
+
+            <div class="card-footer-custom">
+                <a asp-controller="Quejas" asp-action="Details" asp-route-id="@item.QuejaId" class="btn btn-sm btn-outline-primary w-100 rounded-pill fw-bold">
+                    <i class="bi bi-info-circle"></i> Ver Detalles
+                </a>
+            </div>
+        </div>
+    }
+</div>
+        </div>
+    </div>
+
+    <hr class="my-5" style="opacity: 0.1;">
+
+    <div class="row mb-5">
+        <div class="col-12 d-flex justify-content-between align-items-center mb-4 mt-5">
+            <div>
+                <h2 id="seccion-eventos" class="section-header fw-bold mb-1">
+                    <i class="bi bi-calendar-event-fill text-success"></i> Próximos Eventos y Mingas
+                </h2>
+                <p class="text-muted mb-0 ms-2">Actividades diseñadas para mejorar nuestro entorno.</p>
+            </div>
+            <a asp-controller="Eventos" asp-action="Create" class="btn btn-dark rounded-pill px-4 shadow-sm">
+                <i class="bi bi-plus-lg"></i> Nuevo Evento
+            </a>
+        </div>
+
+        <div class="col-12">
+            <div class="home-grid">
+                @foreach (var evento in Model.Eventos)
+                {
+                    <div class="custom-card shadow-sm">
+                        <div class="card-img-container">
+                            @if (!string.IsNullOrEmpty(evento.ImagenEvento))
+                            {
+                                <img src="@evento.ImagenEvento" class="card-img-custom" alt="@evento.Titulo">
+                            }
+                            else
+                            {
+                                <div class="h-100 d-flex align-items-center justify-content-center bg-secondary">
+                                    <i class="bi bi-calendar3 text-white fs-1"></i>
+                                </div>
+                            }
+                            <span class="badge-float bg-info text-dark">@evento.TipoEvento</span>
+                        </div>
+                        <div class="card-body-custom">
+                            <h5 class="fw-bold mb-2">@evento.Titulo</h5>
+                            <p class="mb-1 text-primary small"><i class="bi bi-calendar3"></i> @evento.FechaEvento.ToString("dd/MM/yyyy HH:mm")</p>
+                            <p class="mb-0 text-muted small"><i class="bi bi-geo-alt"></i> @evento.Ubicacion</p>
+                        </div>
+                        <div class="card-footer-custom">
+                            <a asp-controller="Eventos" asp-action="Details" asp-route-id="@evento.EventoId" class="btn btn-sm btn-dark w-100 rounded-pill">
+                                <i class="bi bi-calendar-check"></i> Participar
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5 pt-4">
+        <div class="col-md-6 mb-3">
+            <div class="custom-card border-0 shadow-sm h-100 text-center p-4">
+                <i class="bi bi-question-circle display-4 text-warning mb-3"></i>
+                <h5 class="fw-bold">¿Dudas sobre Reportes?</h5>
+                <p class="text-muted small">Aprende qué incidentes puedes reportar y cómo hacerlo correctamente.</p>
+                <a asp-controller="Quejas" asp-action="Dudas" class="btn btn-sm btn-outline-warning mt-auto rounded-pill px-4">Ver Guía</a>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="custom-card border-0 shadow-sm h-100 text-center p-4">
+                <i class="bi bi-info-circle display-4 text-info mb-3"></i>
+                <h5 class="fw-bold">¿Cómo crear Eventos?</h5>
+                <p class="text-muted small">Consulta los requisitos para organizar mingas o reuniones en el barrio.</p>
+                <a asp-controller="Eventos" asp-action="Dudas" class="btn btn-sm btn-outline-info mt-auto rounded-pill px-4">Ver Guía</a>
             </div>
         </div>
     </div>
 </div>
-
-<style>
-    .card {
-        transition: transform 0.3s ease;
-    }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-</style>

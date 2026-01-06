@@ -1,10 +1,10 @@
 ﻿@model Proyecto1_MZ_MJ.Models.Queja
 @{
-    ViewData["Title"] = "Editar Queja";
+    ViewData["Title"] = "Editar Reporte";
 }
 
 <div class="container mt-4">
-    <h2>Editar Queja</h2>
+    <h2>Editar Reporte</h2>
     <hr />
 
     <div class="row">
@@ -30,6 +30,17 @@
                     <label asp-for="Sector" class="control-label"></label>
                     <input asp-for="Sector" class="form-control" />
                     <span asp-validation-for="Sector" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Prioridad" class="form-label"></label>
+                    <select asp-for="Prioridad" class="form-select">
+                        <option value="">Seleccione...</option>
+                        <option value="Prioridad Alta">Prioridad Alta</option>
+                        <option value="Prioridad Media">Prioridad Media</option>
+                        <option value="Prioridad Baja">Prioridad Baja</option>
+                    </select>
+                    <span asp-validation-for="Prioridad" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     @if (!string.IsNullOrEmpty(Model.Foto))

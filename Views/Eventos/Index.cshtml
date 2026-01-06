@@ -4,11 +4,67 @@
     ViewData["Title"] = "Eventos e Invitaciones";
 }
 
+<style>
+    /* Botones de acción inferiores mejorados */
+    .report-footer {
+        padding: 15px;
+        background: #f8fafc;
+        border-top: 1px solid #edf2f7;
+        display: flex;
+        flex-wrap: wrap; /* Permite que se acomoden si el espacio es poco */
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .btn-action {
+        flex: 1;
+        min-width: 90px; /* Asegura un ancho mínimo para que quepa el texto */
+        padding: 10px 5px;
+        border-radius: 12px;
+        text-align: center;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-decoration: none !important; /* Quita el subrayado */
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    /* Colores con texto muy legible */
+    .btn-view {
+        background-color: #e0e7ff;
+        color: #4338ca !important;
+    }
+
+    .btn-edit {
+        background-color: #fef3c7;
+        color: #92400e !important;
+    }
+
+    .btn-delete {
+        background-color: #fee2e2;
+        color: #b91c1c !important;
+    }
+
+    .btn-action:hover {
+        transform: translateY(-2px);
+        filter: brightness(0.95);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .btn-action i {
+        font-size: 1.1rem;
+    }
+</style>
+
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2><i class="bi bi-calendar-event"></i> Eventos e Invitaciones</h2>
-        <a asp-action="Create" class="btn btn-primary">
-            <i class="bi bi-plus-circle"></i> Crear Evento
+        <a asp-action="Create" class="btn btn-primary rounded-pill px-4">
+            <i class="bi bi-plus-lg"></i> Crear Evento
         </a>
     </div>
 
@@ -56,15 +112,15 @@
                             @(evento.Activo ? "Activo" : "Inactivo")
                         </span> *@
                     </div>
-                    <div class="card-footer bg-white">
-                        <a asp-action="Details" asp-route-id="@evento.EventoId" class="btn btn-sm btn-info">
-                            <i class="bi bi-eye"></i> Ver
+                    <div class="report-footer">
+                        <a asp-action="Details" asp-route-id="@evento.EventoId" class="btn-action btn-view">
+                            <i class="bi bi-eye"></i> Detalle
                         </a>
-                        <a asp-action="Edit" asp-route-id="@evento.EventoId" class="btn btn-sm btn-warning">
+                        <a asp-action="Edit" asp-route-id="@evento.EventoId" class="btn-action btn-edit">
                             <i class="bi bi-pencil"></i> Editar
                         </a>
-                        <a asp-action="Delete" asp-route-id="@evento.EventoId" class="btn btn-sm btn-danger">
-                            <i class="bi bi-trash"></i> Eliminar
+                        <a asp-action="Delete" asp-route-id="@evento.EventoId" class="btn-action btn-delete">
+                            <i class="bi bi-trash"></i> Borrar
                         </a>
                     </div>
                 </div>

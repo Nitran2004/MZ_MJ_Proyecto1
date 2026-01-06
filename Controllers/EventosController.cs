@@ -185,5 +185,11 @@ namespace MZ_MJ_Proyecto1.Controllers
         {
             return (_context.Evento?.Any(e => e.EventoId == id)).GetValueOrDefault();
         }
+
+        // GET: Eventos/Dudas
+        public IActionResult Dudas()
+        {
+            return View();
+        }
     }
 }
